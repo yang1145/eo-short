@@ -19,6 +19,20 @@ const indexHtml = `<!DOCTYPE html>
             --error-color: #ef4444; 
             --success-color: #22c55e; 
         }
+        
+        .dark-mode {
+            --bg-color: #0f0f0f; 
+            --container-bg: #1f1f1f; 
+            --input-bg: #2d2d2d; 
+            --border-color: #404040; 
+            --text-color: #f1f1f1; 
+            --subtle-text: #a0a0a0; 
+            --accent-color: #8b5cf6; 
+            --accent-hover: #7c3aed; 
+            --error-color: #ef4444; 
+            --success-color: #22c55e; 
+        }
+        
         body { 
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
             background-color: var(--bg-color); 
@@ -30,6 +44,7 @@ const indexHtml = `<!DOCTYPE html>
             min-height: 100vh; 
             padding: 1rem; 
             box-sizing: border-box; 
+            transition: background-color 0.3s, color 0.3s;
         }
         .container { 
             width: 100%; 
@@ -119,6 +134,12 @@ const indexHtml = `<!DOCTYPE html>
             background-color: #dcfce7; 
             border: 1px solid var(--success-color);
         }
+        .dark-mode #error-message {
+            background-color: #3a2222;
+        }
+        .dark-mode #success-message {
+            background-color: #1c352a;
+        }
         #success-message a { 
             font-weight: normal; 
             color: var(--accent-color); 
@@ -137,9 +158,21 @@ const indexHtml = `<!DOCTYPE html>
         #success-message .copy-btn:hover { 
             background-color: var(--border-color); 
         }
+        .theme-toggle {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 0.125rem;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
+<button class="theme-toggle" id="themeToggle">切换暗色模式</button>
 <div class="container">
     <h1>短链接生成器</h1>
     <form id="link-form">
@@ -158,6 +191,32 @@ const indexHtml = `<!DOCTYPE html>
     <div id="success-message"></div>
 </div>
 <script>
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    
+    // Check for saved theme preference or respect system preference
+    const savedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+        body.classList.add('dark-mode');
+        themeToggle.textContent = '切换亮色模式';
+    }
+    
+    themeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        
+        if (body.classList.contains('dark-mode')) {
+            themeToggle.textContent = '切换亮色模式';
+            localStorage.setItem('theme', 'dark');
+        } else {
+            themeToggle.textContent = '切换暗色模式';
+            localStorage.setItem('theme', 'light');
+        }
+    });
+    
+    // Rest of the existing JavaScript code
     const form = document.getElementById('link-form');
     const urlInput = document.getElementById('url-input');
     const slugInput = document.getElementById('slug-input');
