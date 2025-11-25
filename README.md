@@ -17,8 +17,6 @@
 
 [![使用国内版EdgeOne Pages 部署](https://cdnstatic.tencentcs.com/edgeone/pages/deploy.svg)](https://console.cloud.tencent.com/edgeone/pages/new?repository-url=https%3A%2F%2Fgithub.com%2Fhobk%2Feo-short%2F)（国内版）
 
-[使用国际版部署](https://edgeone.ai/pages/new?repository-url=https%3A%2F%2Fgithub.com%2Fhobk%2Feo-short%2F)
-
 ### 2. 新建并绑定 KV 数据库
 - 第一步项目部署后，进入 EdgeOne 控制台
 - 在项目设置中，导航到 **KV 存储** 部分
@@ -67,7 +65,7 @@
 
 ## 🤝 贡献
 
-欢迎贡献代码、报告问题和功能请求！请随时查看 [issues 页面](https://github.com/hobk/eo-short/issues)。
+欢迎贡献代码、报告问题和功能请求！请随时查看 [issues 页面](https://github.com/yang1145/eo-short/issues)。
 
 ## 许可证
 
